@@ -14,7 +14,7 @@ export class AppService {
 
 
   getAllPokemonDetails(): Observable<FullPokemonDetail[]> {
-    return this.http.get<PokemonListResponse>(`${this.baseUrl}/pokemon?limit=10&offset=0`).pipe(
+    return this.http.get<PokemonListResponse>(`${this.baseUrl}/pokemon?limit=12&offset=0`).pipe(
       map(response => response.results.map((pokemon) => pokemon.name)),
       switchMap((pokemonNames: string[]) => {
         const detailRequests: Observable<FullPokemonDetail>[] = pokemonNames.map(name => this.getFullPokemonDetails(name));

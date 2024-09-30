@@ -1,11 +1,13 @@
+<app-hero></app-hero>
+
 <div *ngIf="isLoading">
   <p>Cargando Pokémon...</p>
 </div>
 
 <div *ngIf="!isLoading" class=" max-w-7xl mx-auto my-0 p-4">
-  <h2>Lista de Pokémon con detalles</h2>
+
   <ul class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 ">
-    <li *ngFor="let pokemon of pokemons" class="rounded-lg shadow-md p-4">
+    <li *ngFor="let pokemon of pokemons" class="rounded-lg bg-brand-base-dark p-4">
       <h3 class="uppercase text-lg font-semibold">{{ pokemon.name }}</h3>
       <div class="flex justify-center items-center w-full h-32">
         <img [src]="pokemon.sprites.front_default" class="w-full h-full object-contain" alt="{{ pokemon.name }}">
@@ -66,3 +68,8 @@
     </li>
   </ul>
 </div>
+
+
+<footer class="text-xs text-center p-4 opacity-60 mt-3" >
+  Escrito por <a href="https://gustavoeliasexe.vercel.app/" target="_blank" class="hover:font-extrabold" rel="noopener noreferrer">gustavoeliaexe</a>
+</footer>
