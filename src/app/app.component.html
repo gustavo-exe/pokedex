@@ -1,10 +1,6 @@
 <app-hero></app-hero>
 
-<div *ngIf="isLoading">
-  <p>Cargando Pokémon...</p>
-</div>
-
-<div *ngIf="!isLoading" class=" max-w-7xl mx-auto my-0 p-4">
+<div  class=" max-w-7xl mx-auto my-0 p-4">
 
   <ul class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 ">
     <li *ngFor="let pokemon of pokemons" class="rounded-lg bg-brand-base-dark p-4">
@@ -67,6 +63,10 @@
       </p>
     </li>
   </ul>
+</div>
+
+<div *ngIf="isLoading">
+  <p class=" animmate text-lg text-center animate-pulse" >Cargando Pokémons...</p>
 </div>
 
 

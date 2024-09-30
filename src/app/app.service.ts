@@ -9,13 +9,18 @@ import { FullPokemonDetail, PokemonDetail, PokemonListResponse, PokemonSpeciesDe
 export class AppService {
 
   private baseUrl: string = 'https://pokeapi.co/api/v2';
+  private offset: number = 0;
+  private limit: number = 12;
 
   constructor(private http: HttpClient) { }
 
 
   getAllPokemonDetails(): Observable<FullPokemonDetail[]> {
-    return this.http.get<PokemonListResponse>(`${this.baseUrl}/pokemon?limit=12&offset=0`).pipe(
-      map(response => response.results.map((pokemon) => pokemon.name)),
+    return this.http.get<PokemonListResponse>(`${this.baseUrl}/pokemon?limit=${this.limit}&offset=${this.offset}`).pipe(
+      map(response => response.results.map((pokemon) => {
+        this.offset += this.limit;
+        return pokemon.name
+      })),
       switchMap((pokemonNames: string[]) => {
         const detailRequests: Observable<FullPokemonDetail>[] = pokemonNames.map(name => this.getFullPokemonDetails(name));
         return forkJoin(detailRequests);

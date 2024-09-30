@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, HostListener } from '@angular/core';
 import { AppService } from './app.service';
 import { FullPokemonDetail, PokemonDetail } from './app.types';
 
@@ -10,6 +10,13 @@ export class AppComponent {
   pokemons: FullPokemonDetail[] = [];
   isLoading: boolean = true;
 
+  @HostListener('window:scroll', ['$event'])
+  onScroll(event: Event): void {
+    if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight && !this.isLoading) {
+      this.loadAllPokemonDetails(); // Cargar más Pokémon cuando llegas al fondo
+    }
+  }
+
   constructor(private appService: AppService) { }
 
   ngOnInit(): void {
@@ -17,15 +24,14 @@ export class AppComponent {
   }
 
   loadAllPokemonDetails(): void {
+    this.isLoading = true;
     this.appService.getAllPokemonDetails()
-    .subscribe(
-    (next)=> {
+      .subscribe(
+        (next) => {
 
-        this.pokemons = next;
-        this.isLoading = false;
-
-
-    }
-    );
+          this.isLoading = false;
+          this.pokemons = [...this.pokemons, ...next];
+        },
+      );
   }
 }
