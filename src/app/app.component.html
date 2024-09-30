@@ -1,3 +1,68 @@
-<h1 class="text-3xl font-bold underline">
-  Hello world!
-</h1>
+<div *ngIf="isLoading">
+  <p>Cargando Pokémon...</p>
+</div>
+
+<div *ngIf="!isLoading" class=" max-w-7xl mx-auto my-0 p-4">
+  <h2>Lista de Pokémon con detalles</h2>
+  <ul class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 ">
+    <li *ngFor="let pokemon of pokemons" class="rounded-lg shadow-md p-4">
+      <h3 class="uppercase text-lg font-semibold">{{ pokemon.name }}</h3>
+      <div class="flex justify-center items-center w-full h-32">
+        <img [src]="pokemon.sprites.front_default" class="w-full h-full object-contain" alt="{{ pokemon.name }}">
+      </div>
+
+      <section class="flex justify-center items-center gap-1">
+        <span class="rounded-full px-1 border text-xs capitalize" *ngFor="let type of pokemon.types">
+          {{ type }}
+        </span>
+      </section>
+
+      <div class="grid grid-cols-3 text-center my-3">
+
+        <div class="flex items-center justify-center" >
+          <p>
+            {{ pokemon.height }} dm
+          </p>
+        </div>
+
+        <div class="flex items-center justify-center border-x" >
+          <p>{{ pokemon.weight }} hg</p>
+        </div>
+
+        <div>
+          <div *ngFor="let ability of pokemon.abilities; let i = index">
+            <span class="capitalize">{{ ability }}<span *ngIf="i < pokemon.abilities.length - 1">,</span></span>
+          </div>
+        </div>
+
+        <p class="opacity-25 text-xs">Altura</p>
+        <p class="border-x">
+          <span class="opacity-25 text-xs" >Peso</span>
+        </p>
+        <p class="opacity-25 text-xs">Habilidades</p>
+
+
+      </div>
+
+      <!-- Grupos de huevos -->
+      <p><strong>Huevos:</strong>
+        <span *ngFor="let eggGroup of pokemon.eggGroups">
+          {{ eggGroup }}
+        </span>
+      </p>
+
+      <!-- Elementos -->
+      <p *ngIf="pokemon.heldItems.length"><strong>Elementos:</strong>
+        <span *ngFor="let item of pokemon.heldItems">
+          {{ item }}
+        </span>
+      </p>
+
+      <!-- Entradas de Pokédex -->
+      <p><strong>Pokédex:</strong></p>
+      <p class="line-clamp-1">
+        {{ pokemon.pokedexEntries[0].flavor_text }}
+      </p>
+    </li>
+  </ul>
+</div>
