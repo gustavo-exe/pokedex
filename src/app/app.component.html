@@ -33,34 +33,61 @@
           </div>
         </div>
 
-        <p class="opacity-25 text-xs">Altura</p>
-        <p class="border-x">
-          <span class="opacity-25 text-xs" >Peso</span>
-        </p>
-        <p class="opacity-25 text-xs">Habilidades</p>
+        <div class="opacity-25 text-xs">
+          <span>Height</span>
+        </div>
+        <div class="border-x">
+          <span class="opacity-25 text-xs" >Weight</span>
+        </div>
+        <div class="opacity-25 text-xs">
+          <span>Abilities</span>
+        </div>
 
 
       </div>
 
       <!-- Grupos de huevos -->
-      <p><strong>Huevos:</strong>
-        <span *ngFor="let eggGroup of pokemon.eggGroups">
-          {{ eggGroup }}
-        </span>
-      </p>
+      <section class="flex gap-1 py-3 border-t mt-6 border-b border-gray-400/10" >
+        <img src="../assets/egg.svg" class="w-6 h-6" alt="egg">
+        <div class="flex flex-col text-xs">
+          <strong>Huevos</strong>
+          <div class="flex flex-wrap" >
+            <span>
+              {{pokemon.eggGroups.join(', ')}}
+            </span>
+          </div>
+
+        </div>
+      </section>
 
       <!-- Elementos -->
-      <p *ngIf="pokemon.heldItems.length"><strong>Elementos:</strong>
-        <span *ngFor="let item of pokemon.heldItems">
-          {{ item }}
-        </span>
-      </p>
+      <section class="flex gap-1 py-3 border-b border-gray-400/10 mt-1" *ngIf="pokemon.heldItems.length">
+        <img src="../assets/elements.svg" class="w-6 h-6" alt="elements">
+
+        <div class="flex flex-col text-xs" >
+          <strong>Elementos</strong>
+          <div class="flex flex-wrap" >
+            <span>
+              {{ pokemon.heldItems.join(', ') }}
+            </span>
+          </div>
+        </div>
+
+      </section>
 
       <!-- Entradas de Pokédex -->
-      <p><strong>Pokédex:</strong></p>
-      <p class="line-clamp-1">
-        {{ pokemon.pokedexEntries[0].flavor_text }}
-      </p>
+       <section class="flex gap-1  border-b border-gray-400/10 mt-1 py-3"  >
+        <img src="../assets/pokeball.svg" class="w-6 h-6" alt="pokeball">
+
+        <div class="flex flex-col text-xs" >
+          <strong>Pokédex</strong>
+          <span class="line-clamp-1">
+            {{ pokemon.pokedexEntries[0].flavor_text }}
+          </span>
+        </div>
+
+       </section>
+
     </li>
   </ul>
 </div>

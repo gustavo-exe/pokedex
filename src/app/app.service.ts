@@ -49,7 +49,7 @@ export class AppService {
         pokedexEntries: speciesDetail.flavor_text_entries
           .filter(entry => entry.language.name === 'en')
           .map(entry => ({ flavor_text: entry.flavor_text })),
-        heldItems: pokemonDetail.held_items.map(item => item.item.name)
+        heldItems: pokemonDetail.held_items.map(item => item.item.name.trim())
       }))
     );
   }
