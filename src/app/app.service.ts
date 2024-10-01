@@ -2,13 +2,14 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { forkJoin, map, Observable, switchMap } from 'rxjs';
 import { FullPokemonDetail, PokemonDetail, PokemonListResponse, PokemonSpeciesDetail, Result } from './app.types';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AppService {
 
-  private baseUrl: string = 'https://pokeapi.co/api/v2';
+  private baseUrl: string = environment.apiUrl;
   private offset: number = 0;
   private limit: number = 12;
 
